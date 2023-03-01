@@ -8,6 +8,8 @@ gem 'jquery-rails'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
 
+gem "bcrypt", "3.1.18"
+
 # css styling
 gem "bootstrap-sass", '~> 3.4.1'
 
