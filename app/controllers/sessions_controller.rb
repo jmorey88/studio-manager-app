@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       reset_session 
       log_in @user
       flash[:success] = "Welcome to Your Studio!"
-      redirect_to root_url
+      redirect_to dashboard_url
      else
       render 'signup', status: :unprocessable_entity
      end
@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       reset_session
       log_in user
-      redirect_to root_url
+      redirect_to dashboard_url
     else
       flash.now[:danger] = 'Invalid email/password combination'
     render "login", status: :unprocessable_entity
