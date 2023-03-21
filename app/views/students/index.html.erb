@@ -1,0 +1,13 @@
+<h1 class="text-center">
+  <%= current_user.name %>'s Students 
+</h1>
+<ul>
+  <% @students.each do |s| %>
+    <ul>
+      <%= link_to s.name, student_path(s) %>
+    </ul>
+  <% end %>
+<div>
+  <%= button_to "Create New Student", new_student_path, method: :get, class: "btn btn-info"%>
+</div>
+</ul>

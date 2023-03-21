@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'students/edit'
   root "pages#home"
 
   get "/help",           to:  "pages#help"
@@ -7,6 +8,7 @@ Rails.application.routes.draw do
   get "/login",          to:  "sessions#login"
   post "/login",         to: "sessions#create_session"
   delete "/logout",      to: "sessions#destroy"
-  get "/dashboard",      to: "pages#dashboard"
-  # resources :sessions
+
+  resources :students 
+  resources :teachers
 end

@@ -1,23 +1,21 @@
 class SessionsController < ApplicationController
+  
   def signup 
-    @user = User.new
+    @teacher = User.new
   end
 
   def create_teacher
-     @user = User.new(user_params)
-     if @user.save
+     @teacher = User.new(user_params)
+     @teacher.roles = User::TEACHER_ROLE
+     if @teacher.save
       reset_session 
-      log_in @user
+      log_in @teacher
       flash[:success] = "Welcome to Your Studio!"
-      redirect_to dashboard_url
+      redirect_to teacher_path
      else
       render 'signup', status: :unprocessable_entity
      end
   end
-
-  def show
-    @user = User.find(params[:id])
-  end 
 
   def login
   end
@@ -27,9 +25,9 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       reset_session
       log_in user
-      redirect_to dashboard_url
+      redirect_to teacher_path(user)
     else
-      flash.now[:danger] = 'Invalid email/password combination'
+      flash[:error] = 'Invalid email/password combination'
     render "login", status: :unprocessable_entity
     end
   end
