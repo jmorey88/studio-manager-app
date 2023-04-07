@@ -2,6 +2,10 @@
 
 # This Model is for users that can be either teachers or students
 class User < ApplicationRecord
+  include ActiveModel::Dirty
+
+  # define_attribute_methods :password
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d-]+(\.[a-z\d-]+)*\.[a-z]+\z/i
   STUDENT_ROLE = 'student'
   TEACHER_ROLE = 'teacher'
@@ -14,9 +18,26 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }, allow_blank: true
+  validate :valid_password?, on: [:create, :update] 
   validate :ensure_valid_roles
   validate :valid_teacher_id?
+
+  # def initialize
+  #   @password = nil
+  # end
+
+  # def password
+  #   @password
+  # end
+
+  # def password=(val)
+  #   password_will_change! unless val == @password
+  #   @password = val
+  # end
+
+  # def save
+  #   changes_applied
+  # end
 
   def ensure_valid_roles
     return if ROLES.include? roles
@@ -32,15 +53,24 @@ class User < ApplicationRecord
     end
   end
 
+  def valid_password?
+    return unless password_digest_changed?
+    if password.blank?
+      errors.add(:password, 'can\'t be blank')
+    elsif password.length < 6
+      errors.add(:password, 'must be 6 or more characters')
+    end
+  end
+
   # return true if role is student for students or teacher for teachers
 
-  def student?
-    roles == STUDENT_ROLE
-  end
+  # def student?
+  #   roles == STUDENT_ROLE
+  # end
 
-  def teacher?
-    roles == TEACHER_ROLE
-  end
+  # def teacher?
+  #   roles == TEACHER_ROLE
+  # end
 
   # find all students
   scope :students, -> { where(roles: STUDENT_ROLE) }
@@ -55,4 +85,20 @@ class User < ApplicationRecord
 
   belongs_to :teacher, class_name: 'User',
                        optional: true
+
+  #how to make this for students only
+  has_many :lesson_plans, class_name: 'LessonPlan',
+                          foreign_key: 'student_id',
+                          dependent: :destroy
+
+  ROLES.each do |role|
+    define_method("#{role}?") { roles == role }
+
+    define_singleton_method("create_#{role}!") do |student_params|
+      student_params['roles'] = role
+      User.create!(student_params)
+    end
+  end
 end
+
+

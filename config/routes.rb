@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   post "/login",         to: "sessions#create_session"
   delete "/logout",      to: "sessions#destroy"
 
+  # get "/student_lessons/:id", to: "lesson_plans#show_student_lessons", as: "student_lessons"
+
   resources :students 
   resources :teachers
+  resources :lesson_plans
 end

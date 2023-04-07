@@ -2,7 +2,7 @@
   <%= current_user.name %>'s Students 
 </h1>
 <ul>
-  <% @students.each do |s| %>
+  <% current_user.students.each do |s| %>
     <ul>
       <%= link_to s.name, student_path(s) %>
     </ul>
@@ -10,4 +10,6 @@
 <div>
   <%= button_to "Create New Student", new_student_path, method: :get, class: "btn btn-info"%>
 </div>
+<br>
+<%= button_to "back ot dashboard", teacher_path(current_user.id), method: :get %>
 </ul>

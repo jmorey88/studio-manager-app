@@ -8,30 +8,56 @@
 
 User.destroy_all
 
-# generate 5 teachers with 10 students each
+# generate guest teacher
 
-5.times do |t|
-  teacher_name = "teacher#{t+1}"
-  teacher_email = "#{teacher_name}@mail.com"
-  password = "password"
-  teacher_role = "teacher"
-  User.create!(name: teacher_name,
-               email: teacher_email,
-               password: password,
-               password_confirmation: password,
-               roles: teacher_role)
-  10.times do |s|
-    student_name = "student#{s+1}.#{t+1}"
-    student_email = "#{student_name}@mail.com"
-    student_role = "student"
-    teacher_id = t+1
-    User.create!(name: student_name,
-                 email: student_email,
-                 password: password,
-                 password_confirmation: password,
-                 roles: student_role,
-                 teacher_id: teacher_id)
+User.create_teacher!(name: "Guest Teacher",
+                       email: "guest.teacher@mail.com",
+                       password: "fakepassword",
+                       password_confirmation: "fakepassword")
+
+10.times do |s|
+  student_name = Faker::Name.name
+  student_email = "sample.student#{s+1}@mail.com"
+  student = User.create_student!(name: student_name,
+                       email: student_email,
+                       password: "password",
+                       password_confirmation: "password",
+                       teacher_id: 1)
+  5.times do |l|
+    title = "sample lesson#{l+1}"
+    body = Faker::Lorem.sentence(word_count: 5)
+    LessonPlan.create!(title: title,
+                       body: body,
+                       student_id: student.id)
   end
 end
 
+# generate 5 teachers with 10 students each
 
+# 5.times do |t|
+#   teacher_name = Faker::Name.name
+#   teacher_email = "example#{t+1}@mail.com"
+#   password = "password"
+#   teacher = User.create_teacher!(
+#     name: teacher_name,
+#     email: teacher_email,
+#     password: password,
+#     password_confirmation: password
+#   )
+#   10.times do |s|
+#     student_name = Faker::Name.name
+#     student_email = "example#{t+1}.#{s+1}@mail.com"
+#     student = User.create_student!(name: student_name,
+#                          email: student_email,
+#                          password: password,
+#                          password_confirmation: password,
+#                          teacher_id: teacher.id)
+#     5.times do |l|
+#       title = "lesson#{l+1}"
+#       body = Faker::Lorem.sentence(word_count: 5)
+#       LessonPlan.create!(title: title,
+#                          body: body,
+#                          student_id: student.id)
+#     end
+#   end
+# end

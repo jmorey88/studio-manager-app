@@ -10,7 +10,7 @@
         <li><%= link_to "Dashboard", teacher_path(current_user) %></li>
         <li><%= link_to "Log Out", logout_path, method: :delete %></li>
       <% else %>
-        <li><a href=/login>Log in</a></li>
+        <li><%= link_to "Guest Login", login_path(email: "guest.teacher@mail.com", password: "fakepassword") %></li>
       <% end %>
     </ul>
   </div>

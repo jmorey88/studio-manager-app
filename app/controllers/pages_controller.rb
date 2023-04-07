@@ -5,6 +5,4 @@ class PagesController < ApplicationController
   def help
   end    
   
-  # def dashboard
-  # end
 end

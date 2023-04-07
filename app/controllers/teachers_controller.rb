@@ -14,8 +14,8 @@ class TeachersController < ApplicationController
       flash[:success] = "Profile updated"
       redirect_to teacher_path
     else
-      redirect_to @teacher
-      flash[:danger] = 'unsuccessful signup'
+      redirect_to edit_teacher_path
+      flash[:danger] = 'unsuccessful signup' 
     end
   end
 

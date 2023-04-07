@@ -1,0 +1,15 @@
+<div>
+  <% @lesson_plans.each do |l| %>
+    <ul>
+      <%= l.title %>
+      <br>
+      <%= l.body %>
+      <br>
+      <%= link_to "edit lesson", edit_lesson_plan_path(id: l.id) %>
+      <br>
+      <%= link_to "delete lesson", lesson_plan_path(id: l.id), method: :delete %>
+    </ul>
+  <% end %>
+</div>
+
+

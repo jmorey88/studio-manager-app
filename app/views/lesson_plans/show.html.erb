@@ -1,0 +1,6 @@
+<div>
+  <%= @lesson_plan.title %>
+  <%= @lesson_plan.body %>
+<br>
+  <%= button_to "back to dashboard", teacher_path(current_user.id), method: :get %>
+</div>

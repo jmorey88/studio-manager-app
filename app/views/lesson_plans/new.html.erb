@@ -1,0 +1,15 @@
+<%= form_with(model: @lesson_plan) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div>
+    <%= f.collection_select :student_id, @students, :id, :name, prompt: true %>
+  </div>
+  <div>
+    <%= f.text_field :title,  placeholder: "new lesson plan title..." %>
+  </div>
+  <div>
+    <%= f.text_area :body, placeholder: "create new lesson plan..." %>
+  </div>
+  <%= f.submit "Post", class: "btn btn-primary"%>
+<% end %>
+<br>
+<%= button_to "back", :back, method: :get %>

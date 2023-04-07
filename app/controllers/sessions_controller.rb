@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       reset_session 
       log_in @teacher
       flash[:success] = "Welcome to Your Studio!"
-      redirect_to teacher_path
+      redirect_to teacher_path(@teacher)
      else
       render 'signup', status: :unprocessable_entity
      end

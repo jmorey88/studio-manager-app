@@ -2,9 +2,9 @@
   <%= @student.name %>'s Practice Room
 </h1>
 <div class="text-center">
-  <%= button_to "view lesson plans" %>
+  <%= link_to "view lesson plans", lesson_plans_path(student_id: @student.id) %>
   <%= button_to "view practice log" %>
-  <%= link_to "Edit student", edit_student_path(@student) %>
-  <%= button_to "delete student", student_path(@student), method: :delete %>
+  <%= button_to "Edit student", edit_student_path(@student), method: :get %>
+  <%= button_to "delete student", student_path(@student), method: :delete %> 
   <%= button_to "back to students", students_path, method: :get %>
 
