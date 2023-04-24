@@ -1,0 +1,15 @@
+<div>
+  <% @lesson_plans.each do |l| %>
+    <ul>
+      <%= l.title %>
+      <br>
+      <%= l.body %>
+      <br>
+      <%= link_to "edit lesson", edit_lesson_plan_path %>
+      <br>
+      <%= link_to "delete lesson", lesson_plan_path, method: :delete %>
+    </ul>
+  <% end %>
+  <br>
+  <%= button_to "back", student_path, method: :get %>
+</div>

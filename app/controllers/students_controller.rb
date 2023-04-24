@@ -1,6 +1,13 @@
+
 class StudentsController < ApplicationController
+  before_action :authenticate
+
   def show
-    @student = User.students.find(params[:id])
+    @student = current_user.students.where(id: params[:id]).first
+    unless @student 
+      flash[:error] = "student #{params[:id]} doesn't exist"
+      redirect_to root_path
+    end
   end
 
   def index
@@ -12,7 +19,7 @@ class StudentsController < ApplicationController
   end
 
   def create
-    @student = User.new(student_params)
+      @student = User.new(student_params)
      @student.roles = User::STUDENT_ROLE
      @student.teacher_id = current_user.id
      if @student.save
@@ -25,11 +32,11 @@ class StudentsController < ApplicationController
   end
 
   def edit
-    @student = User.students.find(params[:id])
+    @student = current_user.students.find(params[:id])
   end
 
   def update
-    @student = User.students.find(params[:id])
+    @student = current_user.students.find(params[:id])
     if @student.update(student_params)
       flash[:success] = "Profile updated"
       redirect_to student_path(@student)
@@ -40,7 +47,7 @@ class StudentsController < ApplicationController
   end
 
   def destroy
-    @student = User.students.find(params[:id])
+    @student = current_user.students.find(params[:id])
     @student.destroy
     flash[:success] = "Student deleted"
     redirect_to students_path
@@ -51,5 +58,6 @@ class StudentsController < ApplicationController
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
     end
+
 
 end

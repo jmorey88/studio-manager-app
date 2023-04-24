@@ -25,16 +25,12 @@ Things you may want to cover:
 
 TODO List
 
-- switch user_params to teacher_params and student_params in respective controllers
-- dont require password for student edit form
-- switch @user for students to @student
-- current_user.students def as @students
-- replace students routes w/ resources: students
-- move sessions_controller actions for teacher(show, edit, update) to new teacher controller...maybe resources: teachers in routes
-<!-- - add profile action in application_controller -->
-  add profile link that goes to teacher show
--lesson plan controller
+- 
+- dont require password for student edit form(done, but had to change password validations in user.rb.  dont know if what i did was ok!!!)
+
+-lesson plan controller(commit previous work and create new working branch)
   has id and student id
 
+
 Questions for Ross
-- 
+- user authorization def singleton method why student_params not user_params

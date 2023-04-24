@@ -20,8 +20,8 @@ User.create_teacher!(name: "Guest Teacher",
   student_email = "sample.student#{s+1}@mail.com"
   student = User.create_student!(name: student_name,
                        email: student_email,
-                       password: "password",
-                       password_confirmation: "password",
+                       password: "fakepassword",
+                       password_confirmation: "fakepassword",
                        teacher_id: 1)
   5.times do |l|
     title = "sample lesson#{l+1}"
@@ -32,12 +32,12 @@ User.create_teacher!(name: "Guest Teacher",
   end
 end
 
-# generate 5 teachers with 10 students each
+#generate 5 teachers with 10 students each
 
 # 5.times do |t|
 #   teacher_name = Faker::Name.name
 #   teacher_email = "example#{t+1}@mail.com"
-#   password = "password"
+#   password = "fakepassword"
 #   teacher = User.create_teacher!(
 #     name: teacher_name,
 #     email: teacher_email,
