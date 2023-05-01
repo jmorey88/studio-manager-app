@@ -1,7 +1,6 @@
 
 class StudentsController < ApplicationController
-  before_action :authenticate
-
+  
   def show
     @student = current_user.students.where(id: params[:id]).first
     unless @student 
@@ -26,31 +25,38 @@ class StudentsController < ApplicationController
       flash[:success] = "New Student Created"
       redirect_to student_path(@student)
      else
-      flash[:error] = "unsuccessful signup"
+      flash[:error] = "Unsuccessful signup"
       redirect_to new_student_path
      end
   end
 
   def edit
-    @student = current_user.students.find(params[:id])
+    @student = current_user.students.where(id: params[:id]).first
+    unless @student 
+      flash[:error] = "Not authorized to edit these students"
+      redirect_to students_path
+    end
   end
 
   def update
-    @student = current_user.students.find(params[:id])
-    if @student.update(student_params)
+    @student = current_user.students.where(id: params[:id]).first
+    if @student && @student.update(student_params) 
       flash[:success] = "Profile updated"
       redirect_to student_path(@student)
     else
-      redirect_to edit_student_path
-      flash[:danger] = 'unsuccessful update'
+      redirect_to edit_student_path(params[:id])
+      flash[:danger] = 'Unsuccessful update'
     end
   end
 
   def destroy
-    @student = current_user.students.find(params[:id])
-    @student.destroy
-    flash[:success] = "Student deleted"
-    redirect_to students_path
+    @student = current_user.students.where(id: params[:id]).first
+    if @student && @student.destroy
+      flash[:success] = "Student deleted"
+    else
+      flash[:error] = "Not authorized to delete this student"
+    end
+      redirect_to students_path
   end
 
   private

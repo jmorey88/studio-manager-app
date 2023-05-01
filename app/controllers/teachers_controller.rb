@@ -1,5 +1,4 @@
 class TeachersController < ApplicationController
-  before_action :authenticate
   before_action :authorize_teacher
 
   def show

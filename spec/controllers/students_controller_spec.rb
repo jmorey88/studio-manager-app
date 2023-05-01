@@ -76,14 +76,14 @@ RSpec.describe StudentsController, type: :controller do
       expect(response).to redirect_to(student_path(id: assigns(:student).id)) 
     end
     it "redirects to root when not authenticated" do 
-      post :create, params: { user: valid_user_params }
       before_count = User.count
+      post :create, params: { user: valid_user_params }
       expect(User.count).to eq before_count
       expect(response).to redirect_to(root_path)
     end
-    it "shows error and returns to form when new student info is invalid" do
+    it "shows error and returns to form when new student info is invalid" do 
       session[:user_id] = user.id
-      before_count = User.count 
+      before_count = User.count
       invalid_user_params = valid_user_params
       invalid_user_params[:name] = nil
       post :create, params: { user: invalid_user_params }
@@ -105,11 +105,11 @@ RSpec.describe StudentsController, type: :controller do
       expect(assigns(:student)).to be_nil
       expect(response).to redirect_to(root_path) 
     end
-    xit "redirects to root when not authorized" do 
+    it "redirects to root when not authorized" do 
       session[:user_id] = another_user.id
       get :edit, params: { id: student_user.id }
       expect(assigns(:student)).to be_nil
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(students_path)
     end
   end
 
@@ -124,32 +124,39 @@ RSpec.describe StudentsController, type: :controller do
     it "redirect to root when not authenticated" do
       patch :update, params: { id: student_user.id }
       expect(assigns(:student)).to be_nil
-      # expect(assigns(:teacher).email).to eq ((:teacher).email)
       expect(response).to redirect_to(root_path)
     end 
-    xit "redirect to root when not authorized" do 
+    it "redirect to root when not authorized" do 
       session[:user_id] = another_user.id
-      patch :update, params: { id: student_user.id }
+      patch :update, params: { id: student_user.id, user: { email: "new@mail.com" } }
       expect(assigns(:student)).to be_nil
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(edit_student_path(student_user))
     end
   end
   
   describe 'DELETE #destroy' do 
-    it "deletes student record when aurthorized" do
+    it "deletes student record when authenticated" do
       session[:user_id] = user.id
       student_user
-      expect { delete :destroy, params: { id: student_user.id } }
-        .to change(User, :count).by(-1)
+      before_count = User.count
+      delete :destroy, params: { id: student_user.id } 
+      expect(User.count).to eq before_count - 1
       expect(response).to redirect_to students_path
     end
     it "redirects to root when not authenticated" do
       student_user
-      expect { delete :destroy, params: { id: student_user.id } }
-        .to change(User, :count).by(0)
+      before_count = User.count
+      delete :destroy, params: { id: student_user.id } 
+      expect(User.count).to eq before_count
       expect(response).to redirect_to root_path
     end
-    # it "redirects to root when not authorized" do
-    # end 
+    it "redirects to root when not authorized" do
+      session[:user_id] = another_user.id
+      student_user
+      before_count = User.count
+      delete :destroy, params: { id: student_user.id } 
+      expect(User.count).to eq before_count
+      expect(response).to redirect_to students_path
+    end 
   end
 end

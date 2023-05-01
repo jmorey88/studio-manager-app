@@ -6,6 +6,7 @@ class LessonPlan < ApplicationRecord
   validates :student_id, presence: true  
 
 
-  belongs_to :student, class_name: 'User',
-                       optional: true
+  belongs_to :student, class_name: 'User'
+        
+#TODO add custome validation for student role 
 end

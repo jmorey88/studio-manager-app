@@ -25,12 +25,23 @@ Things you may want to cover:
 
 TODO List
 
-- 
-- dont require password for student edit form(done, but had to change password validations in user.rb.  dont know if what i did was ok!!!)
 
--lesson plan controller(commit previous work and create new working branch)
-  has id and student id
-
-
-Questions for Ross
-- user authorization def singleton method why student_params not user_params
+- finish specs
+- finish seed data
+  images
+  lesson_plan text
+    -generated through chat GPT
+- polish styling
+- cleanup/edit code
+  - google how to run rubocop autofix
+    - start from clean working branch first
+- push to heroku
+- think about domain name
+  - look at Route53 for register domain name
+- polish/write ReadMe
+  - look at examples
+  - include images
+  - include link to demo app
+    - screenshot app
+    - put images in S3
+    - link to with markdown

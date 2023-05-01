@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
+  before_action :authenticate
+
   def authenticate
     unless current_user 
       flash[:error] = "Log in to view this page"
