@@ -23,7 +23,7 @@ class User < ApplicationRecord
             length: { minimum: 8 },
             if: :password_digest_changed?, 
             on: [:create, :update] 
-  validates :profile_image_url, presence: true
+  validates :profile_image_url, presence: true, allow_nil: true
 
   def ensure_valid_roles
     return if ROLES.include? roles

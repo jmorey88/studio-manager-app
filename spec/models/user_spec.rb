@@ -16,6 +16,10 @@ RSpec.describe User, type: :model do
     it 'roles' do
       expect(build(:user, roles: 'teacher')).to have_attributes(roles: 'teacher')
     end
+
+    it 'profile image' do 
+      expect(build(:user, profile_image_url: 'https://image.com/name.jpg')).to have_attributes(profile_image_url: 'https://image.com/name.jpg')
+    end
   end
   context 'with validations' do
     subject { create(:teacher) }
@@ -27,7 +31,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_uniqueness_of(:email) }
     it { is_expected.to validate_presence_of(:password) }
     it { is_expected.to validate_length_of(:password).is_at_least(8).on([:create, :update]) }
-    
+    it { should validate_presence_of(:profile_image_url).allow_nil }    
 
     it 'requires roles to be valid' do
       expect(build(:user, roles: 'invalid')).not_to be_valid 
