@@ -2,7 +2,7 @@
   <%= @teacher.name %>'s Studio 
 </h1>
 <div>
-  <%= image_tag("https://studio-manager-profile-images.s3.us-west-1.amazonaws.com/jurica-koletic-7YVZYZeITc8-unsplash.jpg", height: '300px') %>
+  <%= image_tag(@teacher.profile_image_url, height: "300px") %>
 </div>
 <div class="container">
   <div class="row">

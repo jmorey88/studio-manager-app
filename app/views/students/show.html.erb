@@ -2,6 +2,9 @@
   <%= @student.name %>'s Practice Room
 </h1>
 <div class="text-center">
+  <%= image_tag(@student.profile_image_url, height: "300px") %>
+</div>
+<div class="text-center">
   <%= link_to "view lesson plans", lesson_plans_path(student_id: @student.id) %>
   <%= button_to "view practice log" %>
   <%= button_to "Edit student", edit_student_path(@student), method: :get %>
