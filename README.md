@@ -45,3 +45,54 @@ TODO List
     - screenshot app
     - put images in S3
     - link to with markdown
+
+
+questions for ross:
+  - site styling
+    - should there also be reg log in or just guest login...if not reg login should i keep teacher signup on home page?
+    - what and where should i add contact info/created by and links to git or lnkdin
+    - backgroung color/images?
+    - should there be button from lesson_plan_index to view each individ lesson? 
+    - sitewide footer?
+    - should studio manager home page have the word home in it?
+    - should i add more to lesson plan bodies/should they be more diverse
+    - should i generate randome lesson_plan titles?
+    - is it important my randomly generated student names dont match gender of random profile photos....not that im trying to gender type anybody here or anything
+    - we talked about adding more data like instruments or details to lessons like warmups, music, exercises
+
+
+
+my list of needed styling changes
+  - help page
+    - add contact info/and help/about info
+  - new lesson plan page
+    - center, shorten text boxes, add title
+  - student index
+    - add profile images?
+    - fix layout
+      - names too small
+      - create button too big
+  - student show
+    - fix layout
+      - change centered buttons
+      - remove uneeded buttons
+      - change "view lesson plans" from link to button
+      - profile pic placement?
+  - new student form
+    - maybe change/move back button
+  - edit student form
+    - work on title format and wording
+    - shorten update button
+    - shorten form background box?
+  - lesson plan index
+    - add and position title
+    - layout for plans
+      - seperate and enlarge title
+      - put lesson body in box and shorten
+      - maybe make links buttons?
+      - add lesson plan created on dates/updated
+      - add back to student button
+    - path: edit_lesson_plan -> back is wrong
+      - and edit this page
+  - add default profile image
+

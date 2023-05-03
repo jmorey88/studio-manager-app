@@ -1,15 +1,23 @@
 <h1 class="text-center">
   <%= current_user.name %>'s Students 
 </h1>
-<ul>
-  <% current_user.students.each do |s| %>
+<div class="student_list_container">
+  <div class="student-list">
     <ul>
-      <%= link_to s.name, student_path(s) %>
+      <% current_user.students.each do |s| %>
+        <ul>
+          <%= image_tag(s.profile_image_url, width: "75px", height: "75px") %>
+          <br>
+          <%= link_to s.name, student_path(s) %>
+        </ul>
+      <% end %>
     </ul>
-  <% end %>
-<div>
-  <%= button_to "Create New Student", new_student_path, method: :get, class: "btn btn-info"%>
+  </div>
+  <%# <br> %>
+  <div class="buttons">
+    <%= button_to "Create New Student", new_student_path, method: :get, class: "btn btn-info"%>
+    <br>
+    <br>
+    <%= button_to "back ot dashboard", teacher_path(current_user.id), method: :get %>
+  </div>
 </div>
-<br>
-<%= button_to "back ot dashboard", teacher_path(current_user.id), method: :get %>
-</ul>

@@ -42,7 +42,21 @@ input {
   }
 }
 
+.btn_short {
+  width: 100px;
+  
+}
+
 /* miscellaneous */
+
+.student-list {
+  height: 300px;
+  width: 200px;
+  // border: 1px solid black;
+  /* or any other value you prefer */
+  overflow: auto;
+  float: left;
+}
 
 .debug_dump {
   clear: both;
@@ -51,8 +65,43 @@ input {
   margin-top: 45px;
 }
 
-.sidebar {
-  background-color: rgb(208, 201, 201);
+// .sidebar {
+//   background-color: rgb(208, 201, 201);
+// }
+
+.student-list::-webkit-scrollbar {
+  width: 12px;
+}
+
+.student-list::-webkit-scrollbar-track {
+  background-color: #F5F5F5;
+  border-radius: 10px;
+}
+
+.student-list::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border-radius: 10px;
+}
+
+.student-list::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.student_list_container {
+  display: flex;
+  flex-direction: row;
+}
+
+.student-list ul {
+  padding-left: 3%;
+  padding-top: 2%;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  margin-left: 5%;
 }
 
 

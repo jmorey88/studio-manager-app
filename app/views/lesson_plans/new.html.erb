@@ -1,15 +1,22 @@
-<%= form_with(model: @lesson_plan) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <div>
-    <%= f.collection_select :student_id, @students, :id, :name, prompt: true %>
-  </div>
-  <div>
-    <%= f.text_field :title,  placeholder: "new lesson plan title..." %>
-  </div>
-  <div>
-    <%= f.text_area :body, placeholder: "create new lesson plan..." %>
-  </div>
-  <%= f.submit "Post", class: "btn btn-primary"%>
-<% end %>
+<div class="text-center">
+  <h1>Create New Lesson Plan</h1>
+</div>
 <br>
-<%= button_to "back", :back, method: :get %>
+<div class="col-md-6 col-md-offset-3">
+  <%= form_with(model: @lesson_plan) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <br>
+    <%= f.collection_select :student_id, @students, :id, :name, prompt: true, class: 'form-control' %>
+    <br>
+    <%= f.text_field :title,  placeholder: "new lesson plan title...", class: 'form-control'%>
+    <br>
+    <%= f.text_area :body, placeholder: "create new lesson plan...", class: 'form-control', rows: 5 %>
+    <br>
+    <div class= "text-center">
+      <%= f.submit "Post", class: "btn btn-primary btn_short"%>
+    </div>
+  <% end %>
+  <br>
+  <%= button_to "back", :back, method: :get %>
+</div>
+
