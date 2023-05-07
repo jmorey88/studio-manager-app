@@ -10,7 +10,8 @@
   </h1>
   <div class="lesson_plans_container">
     <div>
-    <%= image_tag(@lesson_plans.first.student.profile_image_url, height: "300px") %>
+    <%= image_tag(@lesson_plans.first.student.profile_image_url,
+                  height: "300px") %>
     </div>
     <div class="lesson_plan_list">
       <% @lesson_plans.each do |l| %>
@@ -23,7 +24,10 @@
           <div class="edit-delete">
             <u><%= link_to "Edit Lesson", edit_lesson_plan_path(id: l.id) %></u>
             <br>
-            <u><%= link_to "Delete Lesson", lesson_plan_path(id: l.id, student_id: @lesson_plans.first.student.id), method: :delete %></u>
+            <u><%= link_to "Delete Lesson",
+            lesson_plan_path(id: l.id,
+                             student_id: @lesson_plans.first.student.id),
+                             method: :delete %></u>
           </div>
         </ul>
       <% end %>

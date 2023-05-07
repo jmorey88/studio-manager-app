@@ -1,10 +1,10 @@
-class PagesController < ApplicationController
-  skip_before_action :authenticate, only: [:home, 
-                                           :help]
-  def home
-  end
+# frozen_string_literal: true
 
-  def help
-  end    
-  
+# This controller is for Static Pages actions
+class PagesController < ApplicationController
+  skip_before_action :authenticate, only: %i[home
+                                             help]
+  def home; end
+
+  def help; end
 end

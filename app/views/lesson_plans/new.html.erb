@@ -6,11 +6,14 @@
   <%= form_with(model: @lesson_plan) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     <br>
-    <%= f.collection_select :student_id, @students, :id, :name, prompt: true, class: 'form-control' %>
+    <%= f.collection_select :student_id, @students, :id, :name,
+                            prompt: true, class: 'form-control' %>
     <br>
-    <%= f.text_field :title,  placeholder: "new lesson plan title...", class: 'form-control'%>
+    <%= f.text_field :title,  placeholder: "new lesson plan title...",
+                              class: 'form-control'%>
     <br>
-    <%= f.text_area :body, placeholder: "create new lesson plan...", class: 'form-control', rows: 5 %>
+    <%= f.text_area :body, placeholder: "create new lesson plan...",
+                           class: 'form-control', rows: 5 %>
     <br>
     <div class= "text-center">
       <%= f.submit "Post", class: "btn btn-primary btn_short"%>

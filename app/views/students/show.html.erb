@@ -8,13 +8,16 @@
   <div class="row">
     <ul class="nav col-md-3 sidebar">
       <li class="nav-item">
-        <%= link_to "view lesson plans", lesson_plans_path(student_id: @student.id), class: "button" %>
+        <%= link_to "view lesson plans",
+        lesson_plans_path(student_id: @student.id), class: "button" %>
       </li>
       <li class="nav-item">
-        <%= link_to "Edit student", edit_student_path(@student), class: "button" %>
+        <%= link_to "Edit student",
+        edit_student_path(@student), class: "button" %>
       </li>
       <li class="nav-item">
-        <%= button_to "delete student", student_path(@student), method: :delete, class: "button" %> 
+        <%= button_to "delete student",
+        student_path(@student), method: :delete, class: "button" %> 
       </li>
     </ul>
   </div>

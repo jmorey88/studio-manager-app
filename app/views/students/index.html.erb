@@ -15,7 +15,8 @@
           <ul>
             <%= image_tag(s.profile_image_url, height: "175px") %>
             <br>
-            <u><%= link_to s.name, student_path(s), class: "student_list_name" %></u>
+            <u><%= link_to s.name,
+            student_path(s), class: "student_list_name" %></u>
           </ul>
         <% end %>
       </ul>

@@ -2,8 +2,6 @@
 
 # This Model is for users that can be either teachers or students
 class User < ApplicationRecord
-  
-
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d-]+(\.[a-z\d-]+)*\.[a-z]+\z/i
   STUDENT_ROLE = 'student'
   TEACHER_ROLE = 'teacher'
@@ -19,11 +17,11 @@ class User < ApplicationRecord
   validate :ensure_valid_roles
   validate :valid_teacher_id?
   validate :default_profile_image
-  validates :password, 
-            presence: true, 
+  validates :password,
+            presence: true,
             length: { minimum: 8 },
-            if: :password_digest_changed?, 
-            on: [:create, :update] 
+            if: :password_digest_changed?,
+            on: %i[create update]
   validates :profile_image_url, presence: true, allow_nil: true
 
   def ensure_valid_roles
@@ -34,14 +32,16 @@ class User < ApplicationRecord
 
   def valid_teacher_id?
     if student? && teacher_id.nil?
-      errors.add(:teacher_id, 'required for student user')
+      errors.add(:teacher_id, 'Required for student user.')
     elsif teacher? && !teacher_id.nil?
-      errors.add(:teacher_id, 'relation should be null for teacher user')
+      errors.add(:teacher_id, 'Relation should be null for teacher user.')
     end
   end
 
   def default_profile_image
-    self.profile_image_url ||= "https://studio-manager-profile-images.s3.us-west-1.amazonaws.com/Default_pfp.svg"
+    self.profile_image_url ||=
+      'https://studio-manager-profile-images.s3.
+    us-west-1.amazonaws.com/Default_pfp.svg'
   end
 
   # find all students
@@ -50,15 +50,15 @@ class User < ApplicationRecord
   # find all teachers
   scope :teachers, -> { where(roles: TEACHER_ROLE) }
 
-  # TODO: limit this association to teacher users only 
+  # TODO: limit this association to teacher users only
   has_many :students, class_name: 'User',
                       foreign_key: 'teacher_id'
 
-  # TODO: limit this association to student users only                     
+  # TODO: limit this association to student users only
   belongs_to :teacher, class_name: 'User',
                        optional: true
 
-  # TODO: limit this association to student users only 
+  # TODO: limit this association to student users only
   has_many :lesson_plans, class_name: 'LessonPlan',
                           foreign_key: 'student_id',
                           dependent: :destroy
@@ -72,5 +72,3 @@ class User < ApplicationRecord
     end
   end
 end
-
-

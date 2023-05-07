@@ -11,9 +11,13 @@
     </div>
     <br>
     <div class="edit-delete">
-      <u><%= link_to "Edit Lesson", edit_lesson_plan_path(id: @lesson_plan.id) %></u>
+      <u><%= link_to "Edit Lesson",
+      edit_lesson_plan_path(id: @lesson_plan.id) %></u>
       <br>
-      <u><%= link_to "Delete Lesson", lesson_plan_path(id: @lesson_plan.id, student_id: @lesson_plan.student.id), method: :delete %></u>
+      <u><%= link_to "Delete Lesson",
+      lesson_plan_path(id: @lesson_plan.id,
+                       student_id: @lesson_plan.student.id),
+                       method: :delete %></u>
     </div>
   </div>
 </div>

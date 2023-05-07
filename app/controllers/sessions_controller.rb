@@ -1,38 +1,40 @@
+# frozen_string_literal: true
+
+# This controller is for Session actions
 class SessionsController < ApplicationController
-  skip_before_action :authenticate, only: [:signup, 
-                                           :create_teacher,
-                                           :login,
-                                           :create_session]
-  
-  def signup 
+  skip_before_action :authenticate, only: %i[signup
+                                             create_teacher
+                                             login
+                                             create_session]
+
+  def signup
     @teacher = User.new
   end
 
   def create_teacher
-     @teacher = User.new(user_params)
-     @teacher.roles = User::TEACHER_ROLE
-     if @teacher.save
-      reset_session 
+    @teacher = User.new(user_params)
+    @teacher.roles = User::TEACHER_ROLE
+    if @teacher.save
+      reset_session
       log_in @teacher
-      flash[:success] = "Welcome to Your Studio!"
+      flash[:success] = 'Welcome to Your Studio!'
       redirect_to teacher_path(@teacher)
-     else
+    else
       render 'signup', status: :unprocessable_entity
-     end
+    end
   end
 
-  def login
-  end
+  def login; end
 
   def create_session
     @user = User.find_by(email: params[:session][:email].downcase)
-    if @user && @user.authenticate(params[:session][:password])
+    if @user&.authenticate(params[:session][:password])
       reset_session
       log_in @user
       redirect_to teacher_path(@user)
     else
-      flash[:error] = 'Invalid email/password combination'
-    render "login", status: :unprocessable_entity
+      flash[:error] = 'Invalid email/password combination.'
+      render 'login', status: :unprocessable_entity
     end
   end
 
@@ -43,12 +45,13 @@ class SessionsController < ApplicationController
   end
 
   private
-    def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
-    end
 
-    def log_in(user)
-      session[:user_id] = user.id
-    end
+  def user_params
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation)
+  end
+
+  def log_in(user)
+    session[:user_id] = user.id
+  end
 end

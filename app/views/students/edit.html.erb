@@ -3,7 +3,9 @@
 </h1>
 <h3 class="text-center">Edit Profile</h3>
 <div class="col-md-6 col-md-offset-3">
-  <%= form_with(model: @student, url: student_path(@student), method: :patch, local: true) do |f| %>
+  <%= form_with(model: @student,
+                url: student_path(@student),
+                method: :patch, local: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 
     <%= f.label :name %>
