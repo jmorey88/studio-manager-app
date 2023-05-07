@@ -1,6 +1,19 @@
-<div>
+<h2 class="text-center">
   <%= @lesson_plan.title %>
-  <%= @lesson_plan.body %>
+</h2>
 <br>
-  <%= button_to "back to dashboard", teacher_path(current_user.id), method: :get %>
+<div class="lesson_show_container_parent">
+  <div class="lesson_show_container">
+    <div>
+      <b><%= @lesson_plan.created_at.strftime("%B %d, %Y at %I:%M %p")%></b>
+      <br>
+      <%= @lesson_plan.body %>
+    </div>
+    <br>
+    <div class="edit-delete">
+      <u><%= link_to "Edit Lesson", edit_lesson_plan_path(id: @lesson_plan.id) %></u>
+      <br>
+      <u><%= link_to "Delete Lesson", lesson_plan_path(id: @lesson_plan.id, student_id: @lesson_plan.student.id), method: :delete %></u>
+    </div>
+  </div>
 </div>

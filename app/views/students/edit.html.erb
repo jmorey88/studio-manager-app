@@ -12,8 +12,8 @@
     <%= f.label :email %>
     <%= f.email_field :email, class: 'form_control' %>
 
-    <%= f.submit "Update Profile", class: 'form_control' %>
+    <div class="text-center">
+      <%= f.submit "Update Profile", class: "btn btn-primary btn_short" %>
+    </div>
   <% end %>
-  <br>
-  <%= button_to "back", :back, method: :get %>
 </div>

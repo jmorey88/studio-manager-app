@@ -4,13 +4,14 @@
       <a class="navbar-brand" href=/>StudioManager</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href=/>Home</a></li>
-      <li><a href=/help>Help</a></li>
+      <%# <li><a href=/help>Help</a></li> %>
       <% if logged_in? %>
         <li><%= link_to "Dashboard", teacher_path(current_user) %></li>
+        <li><%= link_to "MyStudents", students_path %></li>
         <li><%= link_to "Log Out", logout_path, method: :delete %></li>
       <% else %>
-        <li><%= link_to "Guest Login", login_path(email: "guest.teacher@mail.com", password: "fakepassword") %></li>
+        <li><%= link_to "Teacher Signup", signup_path%></li>
+        <li><%= link_to "Login", login_path%></li>
       <% end %>
     </ul>
   </div>

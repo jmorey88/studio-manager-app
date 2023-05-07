@@ -59,6 +59,7 @@ questions for ross:
     - should i generate randome lesson_plan titles?
     - is it important my randomly generated student names dont match gender of random profile photos....not that im trying to gender type anybody here or anything
     - we talked about adding more data like instruments or details to lessons like warmups, music, exercises
+    - student index looks funny if no students added yet
 
 
 
@@ -92,7 +93,9 @@ my list of needed styling changes
       - maybe make links buttons?
       - add lesson plan created on dates/updated
       - add back to student button
-    - path: edit_lesson_plan -> back is wrong
+    - path: edit_lesson_plan -> back is wrong!!!!!!!!!!!!!
       - and edit this page
   - add default profile image
+
+
 

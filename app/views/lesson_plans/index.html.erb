@@ -1,15 +1,34 @@
-<div>
-  <% @lesson_plans.each do |l| %>
-    <ul>
-      <%= l.title %>
-      <br>
-      <%= l.body %>
-      <br>
-      <%= link_to "edit lesson", edit_lesson_plan_path(id: l.id) %>
-      <br>
-      <%= link_to "delete lesson", lesson_plan_path(id: l.id), method: :delete %>
-    </ul>
-  <% end %>
-</div>
+<% if @lesson_plans.count == 0 %>
+  <div class="text-center">
+    <h4> No lesson plans for this student. </h4> 
+    <br>
+    <%= link_to "Create Lesson Plan", new_lesson_plan_path, class: "button" %>
+  </div>
+<% else %>
+  <h1 class="text-center">
+    <%= @lesson_plans.first.student.name %>'s <br> Lesson Plans
+  </h1>
+  <div class="lesson_plans_container">
+    <div>
+    <%= image_tag(@lesson_plans.first.student.profile_image_url, height: "300px") %>
+    </div>
+    <div class="lesson_plan_list">
+      <% @lesson_plans.each do |l| %>
+        <ul>
+          <h4> <u><%= l.title %></u> </h4>
+          <b>Created <%= l.created_at.strftime("%B %d, %Y at %I:%M %p") %></b>
+          <br>
+          <%= l.body %>
+          <br>
+          <div class="edit-delete">
+            <u><%= link_to "Edit Lesson", edit_lesson_plan_path(id: l.id) %></u>
+            <br>
+            <u><%= link_to "Delete Lesson", lesson_plan_path(id: l.id, student_id: @lesson_plans.first.student.id), method: :delete %></u>
+          </div>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
 

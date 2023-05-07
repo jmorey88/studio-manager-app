@@ -36,10 +36,12 @@ User.create_teacher!(name: "Guest Teacher",
                        profile_image_url: shuffled_profile_image_links.shift)
   5.times do |l|
     title = "sample lesson #{l+1}"
+    created_at = Time.current - ((s * 5 + l) * 1.week) 
     # body = Faker::Lorem.sentence(word_count: 5)
     LessonPlan.create!(title: title,
                        body: shuffled_sample_lessons.shift,
-                       student_id: student.id)
+                       student_id: student.id,
+                       created_at: created_at)
   end
 end
 

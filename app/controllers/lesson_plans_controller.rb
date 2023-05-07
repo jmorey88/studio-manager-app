@@ -18,11 +18,6 @@ class LessonPlansController < ApplicationController
   end
 
   def show
-    # @lesson_plan = LessonPlan.find(student_id: current_user.students.map(&:id)).first
-    # unless @lesson_plan
-    #   flash[:error] = "Not authorized to view  this lesson_plan"
-    #   redirect_to root_path
-    # end
     @lesson_plan = LessonPlan.find(params[:id])
     if current_user.students.include?(@lesson_plan.student)
     else
@@ -33,17 +28,16 @@ class LessonPlansController < ApplicationController
   end
 
   def index
-    @lesson_plans = LessonPlan.where(student_id: current_user.students.map(&:id))
-
+    @lesson_plans = LessonPlan.where(student_id: current_user.students.map(&:id)).order(created_at: :desc)
     if params[:student_id] 
       @lesson_plans = @lesson_plans.where(student_id: params[:student_id])
-    end
+    end 
 
-    unless @lesson_plans.present?
-      @lesson_plan = nil
-      flash[:error] = "Not authorized to view these lessons"
-      redirect_to root_path
-    end
+    # unless @lesson_plans.present?
+    #   @lesson_plan = nil
+    #   flash[:error] = "Not authorized to view these lessons"
+    #   redirect_to root_path
+    # end
   end
 
   def edit
@@ -78,7 +72,7 @@ class LessonPlansController < ApplicationController
     if current_user.students.include?(@lesson_plan.student)
       @lesson_plan.destroy
       flash[:success] = "Lesson deleted"
-      redirect_to lesson_plans_path
+      redirect_to lesson_plans_path(student_id: @lesson_plan.student.id)
     else
       @lesson_plan = nil
       flash[:error] = "Not authorized to delete this lesson plan"

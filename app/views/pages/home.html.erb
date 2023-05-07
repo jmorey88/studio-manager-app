@@ -1,8 +1,8 @@
 <div class="jumbotron text-center">
-  <h1>Studio Manager Home</h1>
+  <h1>Studio Manager</h1>
   <p>Get ready to make lesson planning a breeze!</p>
   <% if logged_in? %>
   <% else %>
-    <%= button_to "Teacher Signup", signup_path, method: :get, class: "btn btn-info"%>
+    <%= link_to "Guest Login", login_path(email: "guest.teacher@mail.com", password: "fakepassword"), class: "button_guest" %>
   <% end %>
 </div>

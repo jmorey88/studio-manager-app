@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_secure_password
   validate :ensure_valid_roles
   validate :valid_teacher_id?
+  validate :default_profile_image
   validates :password, 
             presence: true, 
             length: { minimum: 8 },
@@ -37,6 +38,10 @@ class User < ApplicationRecord
     elsif teacher? && !teacher_id.nil?
       errors.add(:teacher_id, 'relation should be null for teacher user')
     end
+  end
+
+  def default_profile_image
+    self.profile_image_url ||= "https://studio-manager-profile-images.s3.us-west-1.amazonaws.com/Default_pfp.svg"
   end
 
   # find all students

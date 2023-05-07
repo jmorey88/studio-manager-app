@@ -1,23 +1,27 @@
 <h1 class="text-center">
   <%= current_user.name %>'s Students 
 </h1>
-<div class="student_list_container">
-  <div class="student-list">
-    <ul>
-      <% current_user.students.each do |s| %>
-        <ul>
-          <%= image_tag(s.profile_image_url, width: "75px", height: "75px") %>
-          <br>
-          <%= link_to s.name, student_path(s) %>
-        </ul>
-      <% end %>
-    </ul>
+<br>
+<br>
+<% if current_user.students.count == 0 %>
+  <div class="text-center" >
+    <%= link_to "Create New Student", new_student_path, class: "button" %>
   </div>
-  <%# <br> %>
-  <div class="buttons">
-    <%= button_to "Create New Student", new_student_path, method: :get, class: "btn btn-info"%>
-    <br>
-    <br>
-    <%= button_to "back ot dashboard", teacher_path(current_user.id), method: :get %>
+<% else %>
+  <div class="student_list_container">
+    <div>
+      <ul class="student-list">
+        <% current_user.students.each do |s| %>
+          <ul>
+            <%= image_tag(s.profile_image_url, height: "175px") %>
+            <br>
+            <u><%= link_to s.name, student_path(s), class: "student_list_name" %></u>
+          </ul>
+        <% end %>
+      </ul>
+    </div>
+    <div class="new_student_button" >
+      <%= link_to "Create New Student", new_student_path, class: "button" %>
+    </div>
   </div>
-</div>
+<% end %>
