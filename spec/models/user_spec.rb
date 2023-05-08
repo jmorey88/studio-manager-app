@@ -51,8 +51,7 @@ RSpec.describe User, type: :model do
       it 'requires presence of teacher' do
         new_student = build(:student, teacher: nil)
         expect(new_student).to_not be_valid
-        expect { new_student.save! }.to raise_error(ActiveRecord::RecordInvalid,
-                    'Validation failed: Teacher required for student user')
+        expect { new_student.save! }.to raise_error(ActiveRecord::RecordInvalid, 'Validation failed: Teacher Required for student user.')
       end
     end
 
@@ -60,6 +59,12 @@ RSpec.describe User, type: :model do
       it 'doesn\'t allow presence of teacher' do
         expect(build(:teacher, teacher: subject)).to_not be_valid
       end
+    end
+
+    it "assigns default profile image if nil" do
+      new_user = build(:user, profile_image_url: nil)
+      new_user.save
+      expect(new_user.profile_image_url).to eq 'https://studio-manager-profile-images.s3.us-west-1.amazonaws.com/Default_pfp.svg'
     end
   end
 

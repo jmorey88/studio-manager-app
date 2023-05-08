@@ -28,9 +28,7 @@ User.create_teacher!(name: 'Guest Teacher',
                      email: 'guest.teacher@mail.com',
                      password: 'fakepassword',
                      password_confirmation: 'fakepassword',
-                     profile_image_url: 'https://studio-manager-profile-images.
-                     s3.us-west-1.amazonaws.com/
-                     jurica-koletic-7YVZYZeITc8-unsplash.jpg')
+                     profile_image_url: 'https://studio-manager-profile-images.s3.us-west-1.amazonaws.com/jurica-koletic-7YVZYZeITc8-unsplash.jpg')
 
 # generate 10 students with 5 lesson plans each for guest teacher
 

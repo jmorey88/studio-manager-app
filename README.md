@@ -1,4 +1,75 @@
-# README
+# Studio Manager App
+
+The Studio Manager App is a Rails application that allows teacher users to 
+create an account, manage students, and create lesson plans.
+
+## Features
+
+- User authentication: Teachers can sign up, log in, and log out of the app.
+- Student management: Teachers can create, view, edit, and 
+  delete student profiles.
+- Lesson plan creation: Teachers can create, view, edit, and delete lesson plans 
+  associated with their students.
+
+## Getting Started
+
+To run the Studio Manager App locally, follow these steps:
+
+1. Make sure you have Ruby 3.1.2 installed.
+2. Clone this repository to your local machine.
+3. Install the required gems by running the following command: bundle install
+4. Set up the database by running the following command: rails db:seed
+5. Start the Rails server: rails server
+6. Open your web browser and visit `http://localhost:3000`.
+
+## Usage
+
+- For Guest experience select Guest Login to view app with sample teacher, 
+  student and lesson plan data 
+- Sign up as a teacher user to create an account.
+- Log in with your credentials to access your dashboard.
+- From the dashboard, you can manage your students and create lesson plans.
+- View, edit, or delete student profiles and lesson plans from their 
+  respective pages.
+
+## Screen Shots
+
+- ![home page screenshot](https://studio-manager-profile-images.s3.us-west-1.amazonaws.com/screenshots/StudioManagerScreenshots/home_page_screenshot.png)
+- ![teacher show screenshot](https://studio-manager-profile-images.s3.us-west-1.amazonaws.com/screenshots/StudioManagerScreenshots/teacher_show_screenshot.png)
+- ![student index screenshot](https://studio-manager-profile-images.s3.us-west-1.amazonaws.com/screenshots/StudioManagerScreenshots/student_index_screenshot.png)
+- ![student show screenshot](https://studio-manager-profile-images.s3.us-west-1.amazonaws.com/screenshots/StudioManagerScreenshots/student_show_sceenshot.png)
+- ![lesson plan index screenshot](https://studio-manager-profile-images.s3.us-west-1.amazonaws.com/screenshots/StudioManagerScreenshots/lessonplan_index_screenshot.png)
+
+## File Structure
+
+The Studio Manager App follows a typical Rails file structure. Here are some of 
+the key files and directories:
+
+- `app/controllers`: Contains the controllers for managing different actions.
+- `app/models`: Contains the models for users, students, and lesson plans.
+- `app/views`: Contains the view templates for rendering HTML.
+- `Gemfile`: Lists the required gems and their versions.
+
+## Dependencies
+
+The Studio Manager App has the following dependencies:
+
+- Ruby 3.1.2
+- Rails 7.0.4
+- SQLite 1.4
+
+For a complete list of dependencies, please refer to the `Gemfile` in the 
+root directory.
+
+## Contributing
+
+Contributions to the Studio Manager App are welcome! If you find any issues or 
+have suggestions for improvements, please open an issue or submit 
+a pull request.
+
+
+
+<!-- # README
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
@@ -44,58 +115,9 @@ TODO List
   - include link to demo app
     - screenshot app
     - put images in S3
-    - link to with markdown
+    - link to with markdown -->
 
 
-questions for ross:
-  - site styling
-    - should there also be reg log in or just guest login...if not reg login should i keep teacher signup on home page?
-    - what and where should i add contact info/created by and links to git or lnkdin
-    - backgroung color/images?
-    - should there be button from lesson_plan_index to view each individ lesson? 
-    - sitewide footer?
-    - should studio manager home page have the word home in it?
-    - should i add more to lesson plan bodies/should they be more diverse
-    - should i generate randome lesson_plan titles?
-    - is it important my randomly generated student names dont match gender of random profile photos....not that im trying to gender type anybody here or anything
-    - we talked about adding more data like instruments or details to lessons like warmups, music, exercises
-    - student index looks funny if no students added yet
-
-
-
-my list of needed styling changes
-  - help page
-    - add contact info/and help/about info
-  - new lesson plan page
-    - center, shorten text boxes, add title
-  - student index
-    - add profile images?
-    - fix layout
-      - names too small
-      - create button too big
-  - student show
-    - fix layout
-      - change centered buttons
-      - remove uneeded buttons
-      - change "view lesson plans" from link to button
-      - profile pic placement?
-  - new student form
-    - maybe change/move back button
-  - edit student form
-    - work on title format and wording
-    - shorten update button
-    - shorten form background box?
-  - lesson plan index
-    - add and position title
-    - layout for plans
-      - seperate and enlarge title
-      - put lesson body in box and shorten
-      - maybe make links buttons?
-      - add lesson plan created on dates/updated
-      - add back to student button
-    - path: edit_lesson_plan -> back is wrong!!!!!!!!!!!!!
-      - and edit this page
-  - add default profile image
 
 
 

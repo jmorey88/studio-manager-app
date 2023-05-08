@@ -7,6 +7,8 @@ class User < ApplicationRecord
   TEACHER_ROLE = 'teacher'
   ROLES = [STUDENT_ROLE, TEACHER_ROLE].freeze
 
+  # before_validation :default_profile_image
+
   before_save { self.email = email.downcase }
 
   validates :name, presence: true, length: { maximum: 50 }
@@ -39,9 +41,7 @@ class User < ApplicationRecord
   end
 
   def default_profile_image
-    self.profile_image_url ||=
-      'https://studio-manager-profile-images.s3.
-    us-west-1.amazonaws.com/Default_pfp.svg'
+    self.profile_image_url ||= 'https://studio-manager-profile-images.s3.us-west-1.amazonaws.com/Default_pfp.svg'
   end
 
   # find all students
