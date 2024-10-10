@@ -11,7 +11,14 @@ class StudentsController < ApplicationController
   end
 
   def index
-    @students = current_user.students
+    Benchmark.bm do |x|
+      x.report('Students index query without caching:') do
+        cache_key = "user_#{current_user.id}_students"
+        @students = Rails.cache.fetch(cache_key, expires_in: 12.hours) do
+          current_user.students.to_a
+        end
+      end
+    end
   end
 
   def new

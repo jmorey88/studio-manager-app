@@ -2,7 +2,5 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
-import "@hotwired/turbo-rails"
-import "controllers"
-
-
+import "@hotwired/turbo-rails";
+import "controllers";

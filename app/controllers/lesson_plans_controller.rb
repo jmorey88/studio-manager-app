@@ -13,7 +13,7 @@ class LessonPlansController < ApplicationController
       flash[:success] = 'New Lesson Plan Created.'
       redirect_to lesson_plan_path(@lesson_plan)
     else
-      flash[:error] = "Could not create lesson plan."
+      flash[:error] = 'Could not create lesson plan.'
       redirect_to new_lesson_plan_path(@lesson_plan)
     end
   end
@@ -28,13 +28,24 @@ class LessonPlansController < ApplicationController
   end
 
   def index
-    @lesson_plans = LessonPlan.where(
-      student_id: current_user.students.map(&:id)
-    ).order(created_at: :desc)
-    return unless params[:student_id]
+    Benchmark.bm do |x|
+      x.report('Lesson Plans index query without caching:') do
+        cache_key = "user_#{current_user.id}_lesson_plans"
+        @lesson_plans = Rails.cache.fetch(cache_key, expires_in: 12.hours) do
+          LessonPlan.where(
+            student_id: current_user.students.map(&:id)
+          ).order(created_at: :desc).to_a
+        end
 
-    @lesson_plans = @lesson_plans.where(student_id: params[:student_id])
+        if params[:student_id].present?
+          @lesson_plans = @lesson_plans.select { |lp| lp.student_id == params[:student_id].to_i }
+        end
 
+        # return unless params[:student_id]
+
+        # @lesson_plans = @lesson_plans.where(student_id: params[:student_id])
+      end
+    end
     # unless @lesson_plans.present?
     #   @lesson_plan = nil
     #   flash[:error] = "Not authorized to view these lessons"
